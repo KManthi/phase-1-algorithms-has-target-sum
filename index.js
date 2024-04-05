@@ -1,17 +1,34 @@
 function hasTargetSum(array, target) {
-  // Write your algorithm here
+  const numberSet = {};
+
+  for(const num of array) {
+    const difference = target - num;
+     if(difference in numberSet) return true;
+     numberSet[num] = true;
+  }
+
+  return false;
 }
 
 /* 
-  Write the Big O time complexity of your function here
+  O(n)
 */
 
 /* 
-  Add your pseudocode here
+1. Declare an empty object called numberSet.
+2. Iterate through each number in the array:
+    a. Calculate the difference between the target and the current number.
+    b. If the difference is found in the numberSet object, return true.
+    c. If the difference is not found, add the current number to the numberSet object.
+3. If the loop completes without finding a match, return false.
 */
 
 /*
-  Add written explanation of your solution here
+Declare an empty object numberSet that tracks numbers already encountered.
+Iterate through every number in the array and find the difference between the target and the current number.
+If the difference is found in the numberSet object (using the in operator), exit the loop and return true.
+If the difference isn't found, add the current number to the numberSet object as a key with the value true, and continue looping.
+If the loop completes without finding the difference in the array, return false
 */
 
 // You can run `node index.js` to view these console logs
@@ -29,6 +46,16 @@ if (require.main === module) {
 
   console.log("Expecting: false");
   console.log("=>", hasTargetSum([1, 2, 5], 4));
+
+  console.log("");
+
+  console.log("Expecting: true");
+  console.log("=>", hasTargetSum([11], 11));
+
+  console.log("");
+
+  console.log("Expecting: true");
+  console.log("=>", hasTargetSum([1,-2,3,4,5], 2));
 }
 
 module.exports = hasTargetSum;
